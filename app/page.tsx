@@ -1,330 +1,854 @@
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 
-const heroDomains = [
-  { name: "orphilia.com", tag: "Featured", price: "Inquire" },
-  { name: "whytl.io", tag: "New", price: "Inquire" },
-  { name: "keystone.ai", tag: "Popular", price: "Inquire" },
-];
-
-const features = [
+const featuredDomains = [
   {
-    icon: "🔐",
-    title: "Premium Domain Names",
-    description: "Curated selection of brandable, memorable domain names perfect for your next venture.",
+    name: "orphilia.com",
+    tag: "Featured",
+    desc: "The anchor of the Orphilia ecosystem. A name that means something.",
+    price: "Inquire",
   },
   {
-    icon: "🌐",
-    title: "Orphilia Ecosystem",
-    description: "Exclusive access to domains within the Orphilia digital ecosystem — built on trust and innovation.",
+    name: "keystone.ai",
+    tag: "Popular",
+    desc: "Short, sharp, and built for the AI era. Two syllables, infinite potential.",
+    price: "Inquire",
   },
   {
-    icon: "⚡",
-    title: "Fast Transfer",
-    description: "Secure, automated domain transfers with full support from our team at every step.",
-  },
-  {
-    icon: "💎",
-    title: "Digital Keys",
-    description: "Own unique digital keys and access credentials tied to premium digital identities.",
+    name: "whytl.io",
+    tag: "New",
+    desc: "Our house brand. Clean, memorable, ready to own.",
+    price: "Inquire",
   },
 ];
 
-const testimonials = [
+const stats = [
+  { num: "500+", label: "Domains in portfolio" },
+  { num: "30+", label: "Countries served" },
+  { num: "98%", label: "Client satisfaction" },
+];
+
+const steps = [
   {
-    quote: "Found the perfect domain for my startup in minutes. The Orphilia ecosystem made the transfer seamless.",
-    author: "Sarah Chen",
-    role: "Founder, NovaTech",
-    avatar: "SC",
+    num: "01",
+    title: "Browse the collection",
+    desc: "Explore our hand-curated portfolio of premium domain names and digital keys. Every name is selected for brandability, brevity, and lasting value.",
   },
   {
-    quote: "Whytl's collection of premium domains helped us establish a credible online presence from day one.",
-    author: "Marcus Rivera",
-    role: "CEO, BrightPath",
-    avatar: "MR",
+    num: "02",
+    title: "Reach out directly",
+    desc: "Found something you like — or something you need? Send us a note. We'll respond within 24 hours with availability, pricing, and next steps.",
   },
   {
-    quote: "Professional, fast, and trustworthy. The team went above and beyond to help with our domain strategy.",
-    author: "Priya Sharma",
-    role: "CTO, CloudNine",
-    avatar: "PS",
+    num: "03",
+    title: "Secure transfer",
+    desc: "Once terms are agreed, we handle the transfer end-to-end. Escrow, DNS, and full support — guided by a real person, not a bot.",
   },
 ];
 
 export default function HomePage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section style={{
-        padding: "100px 0 80px",
-        background: "linear-gradient(180deg, #FFF9F5 0%, #FFFFFF 100%)",
-      }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <div style={{
-            display: "inline-block",
-            background: "rgba(255,90,95,0.1)",
-            color: "#FF5A5F",
-            padding: "6px 16px",
-            borderRadius: "20px",
-            fontSize: "14px",
-            fontWeight: "600",
-            marginBottom: "24px",
-          }}>
-            🔑 Premium Domain Marketplace
-          </div>
-          <h1 style={{
-            fontSize: "clamp(40px, 6vw, 72px)",
-            fontWeight: "800",
-            color: "#222222",
-            lineHeight: "1.1",
-            marginBottom: "24px",
-            letterSpacing: "-2px",
-          }}>
-            Your perfect domain<br />is waiting.
-          </h1>
-          <p style={{
-            fontSize: "20px",
-            color: "#717171",
-            maxWidth: "560px",
-            margin: "0 auto 40px",
-            lineHeight: "1.6",
-          }}>
-            Discover premium domain names and digital keys from the Orphilia ecosystem. Short, memorable, and ready for your brand.
-          </p>
-          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/services" className="btn-primary" style={{ fontSize: "16px", padding: "14px 32px" }}>
-              Browse Domains
-            </Link>
-            <Link href="/contact" className="btn-secondary" style={{ fontSize: "16px", padding: "14px 32px" }}>
-              Contact Us
-            </Link>
+      {/* ─── HERO ───────────────────────────────────────── */}
+      <section
+        style={{
+          minHeight: "92vh",
+          display: "flex",
+          alignItems: "center",
+          background: "var(--bg)",
+          borderBottom: "1px solid var(--border)",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Decorative background text */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: "-2%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontFamily: "var(--font-serif)",
+            fontSize: "clamp(140px, 22vw, 320px)",
+            fontWeight: 400,
+            color: "var(--border)",
+            lineHeight: 1,
+            userSelect: "none",
+            letterSpacing: "-0.06em",
+            pointerEvents: "none",
+          }}
+        >
+          .com
+        </div>
+
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <div style={{ maxWidth: "720px" }}>
+            {/* Eyebrow — left-aligned, no pill */}
+            <div
+              className="animate-fade-up"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "32px",
+              }}
+            >
+              <div
+                style={{
+                  width: "32px",
+                  height: "2px",
+                  background: "var(--accent)",
+                  borderRadius: "1px",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "var(--text-muted)",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Premium Domain Marketplace
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1
+              className="animate-fade-up delay-1"
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(52px, 7.5vw, 96px)",
+                fontWeight: 400,
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+                color: "var(--text)",
+                marginBottom: "32px",
+              }}
+            >
+              Your perfect
+              <br />
+              <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+                domain
+              </em>{" "}
+              is waiting.
+            </h1>
+
+            {/* Sub */}
+            <p
+              className="animate-fade-up delay-2"
+              style={{
+                fontSize: "clamp(16px, 2vw, 19px)",
+                color: "var(--text-muted)",
+                lineHeight: 1.65,
+                maxWidth: "480px",
+                marginBottom: "40px",
+              }}
+            >
+              Premium domain names and digital keys from the Orphilia ecosystem.
+              Short, memorable, and ready to become the foundation of your brand.
+            </p>
+
+            {/* CTAs */}
+            <div
+              className="animate-fade-up delay-3"
+              style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
+            >
+              <Link href="/services" className="btn-primary">
+                Browse Domains
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Talk to Us
+              </Link>
+            </div>
+
+            {/* Stats row */}
+            <div
+              className="animate-fade-up delay-4"
+              style={{
+                display: "flex",
+                gap: "40px",
+                marginTop: "72px",
+                paddingTop: "40px",
+                borderTop: "1px solid var(--border)",
+                flexWrap: "wrap",
+              }}
+            >
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(28px, 3.5vw, 40px)",
+                      fontWeight: 400,
+                      color: "var(--text)",
+                      lineHeight: 1,
+                      marginBottom: "6px",
+                      letterSpacing: "-0.03em",
+                    }}
+                  >
+                    {s.num}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "var(--text-faint)",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Domain Showcase */}
-      <section className="section" style={{ background: "white" }}>
+      {/* ─── FEATURED DOMAINS ───────────────────────────── */}
+      <section className="section" style={{ background: "var(--surface)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 className="section-title">Featured Domains</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto 48px" }}>
-              Hand-picked premium domains from our collection
-            </p>
+          {/* Section header — left-aligned */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              marginBottom: "48px",
+              flexWrap: "wrap",
+              gap: "16px",
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  color: "var(--text-faint)",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: "8px",
+                }}
+              >
+                Curated Selection
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(32px, 4vw, 52px)",
+                  fontWeight: 400,
+                  letterSpacing: "-0.025em",
+                  color: "var(--text)",
+                }}
+              >
+                Featured domains.
+              </h2>
+            </div>
+            <Link
+              href="/services"
+              className="link-accent"
+              style={{
+                fontSize: "14px",
+                fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              View all domains
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <path d="M2 7h10M8 3l4 4-4 4" />
+              </svg>
+            </Link>
           </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "24px",
-          }}>
-            {heroDomains.map((domain) => (
-              <div key={domain.name} className="card" style={{ cursor: "pointer" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
-                  <span style={{
-                    background: domain.tag === "Featured" ? "#FF5A5F" : domain.tag === "New" ? "#00A699" : "#FF8C00",
-                    color: "white",
-                    padding: "4px 10px",
-                    borderRadius: "12px",
-                    fontSize: "12px",
-                    fontWeight: "700",
-                  }}>
-                    {domain.tag}
-                  </span>
-                  <span style={{ fontSize: "24px" }}>🌐</span>
-                </div>
-                <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#222222", marginBottom: "8px" }}>
-                  {domain.name}
-                </h3>
-                <p style={{ fontSize: "14px", color: "#717171", marginBottom: "20px" }}>
-                  Premium domain from the Orphilia ecosystem
-                </p>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: "18px", fontWeight: "700", color: "#FF5A5F" }}>{domain.price}</span>
-                  <Link href="/contact" style={{
-                    color: "#222222",
-                    fontWeight: "600",
-                    fontSize: "14px",
-                    display: "flex",
+
+          {/* Domain list — not cards inside cards */}
+          <div>
+            {featuredDomains.map((domain, i) => (
+              <Reveal key={domain.name} delay={i * 80}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto",
                     alignItems: "center",
-                    gap: "4px",
-                  }}>
-                    Inquire →
-                  </Link>
+                    padding: "28px 0",
+                    borderBottom:
+                      i === featuredDomains.length - 1
+                        ? "none"
+                        : "1px solid var(--border)",
+                    gap: "24px",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "clamp(20px, 2.5vw, 28px)",
+                          fontWeight: 600,
+                          color: "var(--text)",
+                          letterSpacing: "-0.02em",
+                        }}
+                      >
+                        {domain.name}
+                      </h3>
+                      <span
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: 600,
+                          color:
+                            domain.tag === "Featured"
+                              ? "var(--accent)"
+                              : domain.tag === "Popular"
+                              ? "#00A67E"
+                              : "var(--text-faint)",
+                          letterSpacing: "0.06em",
+                          textTransform: "uppercase",
+                          padding: "3px 8px",
+                          border: `1px solid ${
+                            domain.tag === "Featured"
+                              ? "var(--accent)"
+                              : domain.tag === "Popular"
+                              ? "#00A67E"
+                              : "var(--border)"
+                          }`,
+                          borderRadius: "2px",
+                        }}
+                      >
+                        {domain.tag}
+                      </span>
+                    </div>
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        color: "var(--text-muted)",
+                        maxWidth: "460px",
+                      }}
+                    >
+                      {domain.desc}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "24px",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        color: "var(--accent)",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {domain.price}
+                    </span>
+                    <Link
+                      href="/contact"
+                      className="btn-secondary"
+                      style={{ fontSize: "14px", padding: "10px 18px" }}
+                    >
+                      Inquire
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="section" style={{ background: "#F7F7F7" }}>
+      {/* ─── WHY WHYTL ──────────────────────────────────── */}
+      <section className="section" style={{ background: "var(--bg)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 className="section-title">Why choose Whytl?</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto" }}>
-              Built on the Orphilia platform, trusted by founders and businesses worldwide.
-            </p>
-          </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "24px",
-          }}>
-            {features.map((feature) => (
-              <div key={feature.title} className="card">
-                <span style={{ fontSize: "40px", display: "block", marginBottom: "20px" }}>{feature.icon}</span>
-                <h3 style={{ fontSize: "18px", fontWeight: "700", color: "#222222", marginBottom: "10px" }}>
-                  {feature.title}
-                </h3>
-                <p style={{ fontSize: "15px", color: "#717171", lineHeight: "1.7" }}>
-                  {feature.description}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "80px",
+              alignItems: "start",
+            }}
+          >
+            {/* Left: Statement */}
+            <Reveal direction="left">
+              <div>
+                <p
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "var(--text-faint)",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Why Whytl
                 </p>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(32px, 4vw, 52px)",
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.025em",
+                    color: "var(--text)",
+                    marginBottom: "28px",
+                  }}
+                >
+                  Built on trust.
+                  <br />
+                  <em style={{ fontStyle: "italic" }}>
+                    Designed for builders.
+                  </em>
+                </h2>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.75,
+                    marginBottom: "20px",
+                  }}
+                >
+                  We started Whytl because the domain market was broken — full of
+                  opaque pricing, impersonal brokerages, and transfers that felt
+                  like a leap of faith.
+                </p>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.75,
+                    marginBottom: "36px",
+                  }}
+                >
+                  Whytl is different. Every domain in our portfolio is hand-selected.
+                  Every transfer is handled by a human who cares. And every price is
+                  fair and transparent.
+                </p>
+                <Link href="/about" className="btn-secondary">
+                  Our story
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </Reveal>
 
-      {/* How It Works */}
-      <section className="section" style={{ background: "white" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <h2 className="section-title">How It Works</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto" }}>
-              Getting your perfect domain is simple and secure.
-            </p>
-          </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "40px",
-            position: "relative",
-          }}>
-            {[
-              { step: "01", title: "Browse & Select", desc: "Explore our curated collection of premium domains. Find the one that fits your brand vision." },
-              { step: "02", title: "Connect & Negotiate", desc: "Reach out via our contact form. We&apos;ll match you with the right domain and handle negotiations transparently." },
-              { step: "03", title: "Secure Transfer", desc: "Complete a safe, automated transfer with our team guiding you through every step of the process." },
-            ].map((item, i) => (
-              <div key={item.step} style={{ textAlign: "center", position: "relative" }}>
-                <div style={{
-                  width: "64px",
-                  height: "64px",
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #FF5A5F 0%, #FF8C00 100%)",
-                  color: "white",
-                  fontSize: "18px",
-                  fontWeight: "800",
+            {/* Right: Value list */}
+            <Reveal delay={120}>
+              <div
+                style={{
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 20px",
-                }}>
-                  {item.step}
-                </div>
-                <h3 style={{ fontSize: "20px", fontWeight: "700", color: "#222222", marginBottom: "12px" }}>
-                  {item.title}
-                </h3>
-                <p style={{ fontSize: "15px", color: "#717171", lineHeight: "1.7" }}>
-                  {item.desc}
-                </p>
+                  flexDirection: "column",
+                  gap: "0",
+                  borderTop: "1px solid var(--border)",
+                }}
+              >
+                {[
+                  {
+                    title: "Curated, not collected",
+                    desc: "We list domains we believe in. No inflated portfolios, no dead weight.",
+                  },
+                  {
+                    title: "Human-first transfers",
+                    desc: "Every transfer is personally overseen. No automated emails, no black boxes.",
+                  },
+                  {
+                    title: "Orphilia ecosystem",
+                    desc: "Backed by the infrastructure and reputation of the Orphilia platform.",
+                  },
+                  {
+                    title: "Fair, transparent pricing",
+                    desc: "No hidden fees. No games. The price you see is the price you pay.",
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={item.title}
+                    style={{
+                      padding: "24px 0",
+                      borderBottom: "1px solid var(--border)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "16px",
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-serif)",
+                          fontSize: "11px",
+                          color: "var(--text-faint)",
+                          marginTop: "4px",
+                          flexShrink: 0,
+                        }}
+                      >
+                        0{i + 1}
+                      </span>
+                      <div>
+                        <h3
+                          style={{
+                            fontFamily: "var(--font-sans)",
+                            fontSize: "16px",
+                            fontWeight: 600,
+                            color: "var(--text)",
+                            marginBottom: "6px",
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
+                          {item.title}
+                        </h3>
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            color: "var(--text-muted)",
+                            lineHeight: 1.65,
+                          }}
+                        >
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </Reveal>
           </div>
         </div>
+
         <style>{`
           @media (max-width: 768px) {
-            section:last-child .container > div:last-child {
+            section:nth-of-type(3) .container > div {
               grid-template-columns: 1fr !important;
-              gap: 32px !important;
+              gap: 48px !important;
             }
           }
         `}</style>
       </section>
 
-      {/* Testimonials */}
-      <section className="section" style={{ background: "#1A1A1A", color: "white" }}>
+      {/* ─── HOW IT WORKS ───────────────────────────────── */}
+      <section className="section" style={{ background: "var(--bg-alt)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 className="section-title" style={{ color: "white" }}>What our clients say</h2>
+          <div style={{ marginBottom: "56px" }}>
+            <p
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "var(--text-faint)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "12px",
+              }}
+            >
+              Process
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 400,
+                letterSpacing: "-0.025em",
+                color: "var(--text)",
+              }}
+            >
+              Three steps to your domain.
+            </h2>
           </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "24px",
-          }}>
-            {testimonials.map((t) => (
-              <div key={t.author} style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "16px",
-                padding: "32px",
-              }}>
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.85)", lineHeight: "1.7", marginBottom: "24px", fontStyle: "italic" }}>
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <div style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    background: "linear-gradient(135deg, #FF5A5F, #FF8C00)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "700",
-                    fontSize: "14px",
-                    color: "white",
-                  }}>
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p style={{ fontWeight: "600", fontSize: "14px", color: "white" }}>{t.author}</p>
-                    <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>{t.role}</p>
-                  </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "48px",
+            }}
+          >
+            {steps.map((step, i) => (
+              <Reveal key={step.num} delay={i * 100}>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "56px",
+                      fontWeight: 400,
+                      color: "var(--border-strong)",
+                      lineHeight: 1,
+                      marginBottom: "20px",
+                      letterSpacing: "-0.04em",
+                    }}
+                  >
+                    {step.num}
+                  </p>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "var(--text)",
+                      marginBottom: "12px",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: "var(--text-muted)",
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    {step.desc}
+                  </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
+
+        <style>{`
+          @media (max-width: 768px) {
+            section:nth-of-type(4) .container > div:last-child {
+              grid-template-columns: 1fr !important;
+              gap: 40px !important;
+            }
+          }
+        `}</style>
       </section>
 
-      {/* CTA Section */}
-      <section style={{
-        padding: "100px 0",
-        background: "linear-gradient(135deg, #FF5A5F 0%, #FF8C00 100%)",
-        textAlign: "center",
-        color: "white",
-      }}>
+      {/* ─── ORPHILIA BANNER ────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--text)",
+          padding: "80px 0",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Large background text */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-3%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontFamily: "var(--font-serif)",
+            fontSize: "clamp(100px, 18vw, 240px)",
+            fontWeight: 400,
+            color: "rgba(248,247,244,0.04)",
+            lineHeight: 1,
+            letterSpacing: "-0.06em",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        >
+          Orphilia
+        </div>
+
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.2fr 1fr",
+              gap: "80px",
+              alignItems: "center",
+            }}
+          >
+            <Reveal direction="left">
+              <div>
+                <p
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "rgba(248,247,244,0.35)",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    marginBottom: "20px",
+                  }}
+                >
+                  The Ecosystem
+                </p>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(32px, 4vw, 52px)",
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.025em",
+                    color: "var(--bg)",
+                    marginBottom: "24px",
+                  }}
+                >
+                  Part of something{" "}
+                  <em style={{ fontStyle: "italic" }}>bigger.</em>
+                </h2>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "rgba(248,247,244,0.55)",
+                    lineHeight: 1.75,
+                    marginBottom: "36px",
+                    maxWidth: "420px",
+                  }}
+                >
+                  Whytl sits within the Orphilia digital ecosystem — a suite of
+                  tools and services for builders, creators, and entrepreneurs.
+                  From domain names to digital keys, Orphilia powers the
+                  infrastructure of tomorrow&apos;s internet.
+                </p>
+                <a
+                  href="https://orphilia.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{
+                    background: "var(--bg)",
+                    color: "var(--text)",
+                    borderRadius: "3px",
+                  }}
+                >
+                  Explore Orphilia
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  >
+                    <path d="M2 7h10M8 3l4 4-4 4" />
+                  </svg>
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={150}>
+              <div
+                style={{
+                  borderLeft: "1px solid rgba(248,247,244,0.1)",
+                  paddingLeft: "48px",
+                }}
+              >
+                {[
+                  { label: "Digital Identity", desc: "Premium domains and keys" },
+                  { label: "Ecosystem Access", desc: "Cross-platform integration" },
+                  { label: "Security", desc: "Escrow and transfer protection" },
+                  { label: "Support", desc: "Human-led, 24/7 available" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    style={{
+                      padding: "20px 0",
+                      borderBottom: "1px solid rgba(248,247,244,0.08)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "15px",
+                        fontWeight: 600,
+                        color: "var(--bg)",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {item.label}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "rgba(248,247,244,0.4)",
+                      }}
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 768px) {
+            section:nth-of-type(5) .container > div {
+              grid-template-columns: 1fr !important;
+              gap: 48px !important;
+            }
+            section:nth-of-type(5) .container > div > div:last-child {
+              borderLeft: none !important;
+              paddingLeft: 0 !important;
+            }
+          }
+        `}</style>
+      </section>
+
+      {/* ─── CTA ────────────────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--bg)",
+          borderTop: "1px solid var(--border)",
+          padding: "100px 0",
+        }}
+      >
         <div className="container">
-          <h2 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: "800", marginBottom: "16px", letterSpacing: "-1px" }}>
-            Ready to find your domain?
-          </h2>
-          <p style={{ fontSize: "18px", opacity: "0.9", marginBottom: "40px", maxWidth: "480px", margin: "0 auto 40px" }}>
-            Join hundreds of founders who trust Whytl and the Orphilia ecosystem for their digital identity.
-          </p>
-          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/services" style={{
-              background: "white",
-              color: "#FF5A5F",
-              padding: "14px 32px",
-              borderRadius: "12px",
-              fontWeight: "700",
-              fontSize: "16px",
-              transition: "all 0.2s",
-            }}>
-              Browse All Domains
-            </Link>
-            <Link href="/contact" style={{
-              background: "transparent",
-              color: "white",
-              padding: "14px 32px",
-              borderRadius: "12px",
-              fontWeight: "700",
-              fontSize: "16px",
-              border: "2px solid rgba(255,255,255,0.5)",
-              transition: "all 0.2s",
-            }}>
-              Talk to Us
-            </Link>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr auto",
+              alignItems: "center",
+              gap: "48px",
+              flexWrap: "wrap",
+            }}
+          >
+            <Reveal direction="left">
+              <div>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(32px, 4.5vw, 56px)",
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.025em",
+                    color: "var(--text)",
+                    marginBottom: "16px",
+                  }}
+                >
+                  Ready to find your domain?
+                </h2>
+                <p
+                  style={{
+                    fontSize: "17px",
+                    color: "var(--text-muted)",
+                    maxWidth: "460px",
+                  }}
+                >
+                  Browse our collection or reach out. No pressure, no
+                  hard sell — just a conversation.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                <Link href="/services" className="btn-primary">
+                  Browse Domains
+                </Link>
+                <Link href="/contact" className="btn-secondary">
+                  Get in Touch
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

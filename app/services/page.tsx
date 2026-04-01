@@ -1,249 +1,387 @@
-"use client";
-
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import DomainRow from "@/components/DomainRow";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services — Whytl",
+  description:
+    "Premium domain names, digital keys, and domain brokering from the Orphilia ecosystem.",
+};
 
 const services = [
   {
-    icon: "🌐",
     title: "Premium Domain Names",
-    tagline: "Short, memorable, brandable",
-    description: "Browse our hand-curated selection of premium .com, .io, .ai, and other TLD domains. Every domain is carefully selected for brandability, SEO value, and memorability.",
-    features: ["One-word & brandable names", "Premium .com & niche TLDs", "SEO-optimized options", "Instant availability check"],
-    popular: true,
-    cta: "Browse Domains",
+    tagline: "Short. Memorable. Brandable.",
+    desc: "Our core offering. We curate a portfolio of hand-selected premium domains — .com, .io, .ai, and beyond. Every name earns its place through brevity, pronounceability, and brand potential.",
+    features: [
+      "One-word & two-word brandable names",
+      "Premium .com, .io, .ai, .co domains",
+      "SEO-optimized naming options",
+      "Instant availability check on inquiry",
+    ],
   },
   {
-    icon: "🔑",
     title: "Digital Keys",
-    tagline: "Access the Orphilia ecosystem",
-    description: "Digital keys grant exclusive access to services, platforms, and early-adopter opportunities within the growing Orphilia digital ecosystem.",
-    features: ["Orphilia ecosystem access", "Exclusive platform features", "Early-bird product access", "Priority support通道"],
-    popular: false,
-    cta: "Learn More",
+    tagline: "Access the Orphilia ecosystem.",
+    desc: "Digital keys grant exclusive access to services, features, and early-adopter opportunities within the Orphilia digital ecosystem. They're not just credentials — they're membership.",
+    features: [
+      "Orphilia platform ecosystem access",
+      "Exclusive product features",
+      "Early-adopter program enrollment",
+      "Priority support channel",
+    ],
   },
   {
-    icon: "🤝",
     title: "Domain Brokering",
-    tagline: "We find, you own",
-    description: "Can't find what you're looking for? Our domain brokering service puts our expertise to work — sourcing, negotiating, and securing the perfect domain for you.",
-    features: ["Custom domain search", "Marketplace negotiation", "Secure escrow service", "Full transfer support"],
-    popular: false,
-    cta: "Start a Search",
+    tagline: "We find it. You own it.",
+    desc: "Can't find the right name in our portfolio? Our brokering service puts our network and expertise to work — sourcing, negotiating, and securing the perfect domain for your brand.",
+    features: [
+      "Custom domain acquisition search",
+      "Marketplace & private owner negotiation",
+      "Secure escrow service",
+      "End-to-end transfer support",
+    ],
   },
 ];
 
-const domainListings = [
-  { name: "orphilia.com", category: "Brand", price: "Premium" },
-  { name: "keystone.ai", category: "AI / Tech", price: "Premium" },
-  { name: "nexusnow.com", category: "Brand", price: "$2,500" },
-  { name: "cloudvault.io", category: "SaaS", price: "$1,800" },
-  { name: "zenloop.com", category: "Wellness", price: "$950" },
-  { name: "stackflow.io", category: "Dev Tools", price: "$2,200" },
-  { name: "purely.app", category: "Mobile", price: "$1,200" },
-  { name: "bloomia.co", category: "Brand", price: "$750" },
-  { name: "forged.ai", category: "AI / Tech", price: "$3,500" },
+const domains = [
+  { name: "orphilia.com", cat: "Brand", price: "Premium" },
+  { name: "keystone.ai", cat: "AI / Tech", price: "Premium" },
+  { name: "nexusnow.com", cat: "Brand", price: "$2,500" },
+  { name: "cloudvault.io", cat: "SaaS", price: "$1,800" },
+  { name: "zenloop.com", cat: "Wellness", price: "$950" },
+  { name: "stackflow.io", cat: "Dev Tools", price: "$2,200" },
+  { name: "purely.app", cat: "Mobile", price: "$1,200" },
+  { name: "bloomia.co", cat: "Brand", price: "$750" },
+  { name: "forged.ai", cat: "AI / Tech", price: "$3,500" },
 ];
 
-const categories = ["All", "Brand", "AI / Tech", "SaaS", "Dev Tools", "Mobile"];
+const categories = ["All", "Brand", "AI / Tech", "SaaS", "Dev Tools", "Mobile", "Wellness", "Mobile"];
+
+const tiers = [
+  {
+    name: "Starter",
+    price: "From $500",
+    desc: "Quality domains for personal projects, side ventures, and early-stage brands. Short, memorable, and priced fairly.",
+    cta: "Browse Starter",
+    featured: false,
+  },
+  {
+    name: "Growth",
+    price: "From $1,500",
+    desc: "Premium brandable domains for startups and growing companies. The names that make people remember you.",
+    cta: "Browse Growth",
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    desc: "High-value, ultra-premium domains with full brokering support. For brands that need the best and want a partner to get them there.",
+    cta: "Start a Conversation",
+    featured: false,
+  },
+];
 
 export default function ServicesPage() {
   return (
     <div>
-      {/* Hero */}
-      <section style={{
-        padding: "100px 0 80px",
-        background: "linear-gradient(180deg, #F7F7F7 0%, #FFFFFF 100%)",
-      }}>
-        <div className="container" style={{ maxWidth: "720px", textAlign: "center" }}>
-          <div style={{
-            display: "inline-block",
-            background: "rgba(255,140,0,0.1)",
-            color: "#FF8C00",
-            padding: "6px 16px",
-            borderRadius: "20px",
-            fontSize: "14px",
-            fontWeight: "600",
-            marginBottom: "24px",
-          }}>
-            💼 Our Services
+      {/* ─── HERO ───────────────────────────────────────── */}
+      <section
+        style={{
+          padding: "96px 0 80px",
+          background: "var(--bg)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <div className="container">
+          <div style={{ maxWidth: "680px" }}>
+            <p
+              className="animate-fade-up"
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "var(--text-faint)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "24px",
+                  height: "1.5px",
+                  background: "var(--accent)",
+                }}
+              />
+              Our Services
+            </p>
+
+            <h1
+              className="animate-fade-up delay-1"
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(40px, 6vw, 80px)",
+                fontWeight: 400,
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                color: "var(--text)",
+                marginBottom: "28px",
+              }}
+            >
+              Everything you need for your{" "}
+              <em style={{ fontStyle: "italic" }}>digital identity.</em>
+            </h1>
+
+            <p
+              className="animate-fade-up delay-2"
+              style={{
+                fontSize: "clamp(16px, 2vw, 18px)",
+                color: "var(--text-muted)",
+                lineHeight: 1.7,
+                maxWidth: "500px",
+              }}
+            >
+              From premium domain names to digital keys and expert brokering —
+              we provide the full toolkit for establishing and growing your
+              digital presence.
+            </p>
           </div>
-          <h1 style={{
-            fontSize: "clamp(36px, 5vw, 60px)",
-            fontWeight: "800",
-            color: "#222222",
-            lineHeight: "1.15",
-            marginBottom: "24px",
-            letterSpacing: "-1.5px",
-          }}>
-            Everything you need<br />for your digital identity.
-          </h1>
-          <p style={{ fontSize: "20px", color: "#717171", lineHeight: "1.6" }}>
-            From premium domain names to digital keys and expert brokering — we provide a full suite of services to help you establish and grow your digital presence.
-          </p>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="section" style={{ background: "white" }}>
+      {/* ─── SERVICES ───────────────────────────────────── */}
+      <section className="section" style={{ background: "var(--surface)" }}>
         <div className="container">
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "32px",
-          }}>
-            {services.map((service) => (
-              <div
+          <div style={{ marginBottom: "56px" }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(28px, 3.5vw, 44px)",
+                fontWeight: 400,
+                letterSpacing: "-0.025em",
+                color: "var(--text)",
+              }}
+            >
+              What we offer.
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "0",
+              borderTop: "1px solid var(--border)",
+            }}
+          >
+            {services.map((service, i) => (
+              <Reveal
                 key={service.title}
-                className="card"
+                delay={i * 100}
                 style={{
-                  border: service.popular ? "2px solid #FF5A5F" : "1px solid #E0E0E0",
-                  position: "relative",
-                  overflow: "hidden",
+                  padding: "40px 32px 40px 0",
+                  borderRight: i < services.length - 1 ? "1px solid var(--border)" : "none",
+                  paddingRight: "32px",
+                  borderTop: "3px solid transparent",
+                  transition: "border-top-color 0.2s ease",
                 }}
               >
-                {service.popular && (
-                  <div style={{
-                    position: "absolute",
-                    top: "16px",
-                    right: "16px",
-                    background: "#FF5A5F",
-                    color: "white",
-                    padding: "4px 12px",
-                    borderRadius: "12px",
-                    fontSize: "12px",
-                    fontWeight: "700",
-                  }}>
-                    Most Popular
-                  </div>
-                )}
-                <span style={{ fontSize: "48px", display: "block", marginBottom: "20px" }}>{service.icon}</span>
-                <h2 style={{ fontSize: "24px", fontWeight: "800", color: "#222222", marginBottom: "4px" }}>
-                  {service.title}
-                </h2>
-                <p style={{ fontSize: "14px", color: "#00A699", fontWeight: "600", marginBottom: "16px" }}>
-                  {service.tagline}
-                </p>
-                <p style={{ fontSize: "15px", color: "#717171", lineHeight: "1.7", marginBottom: "24px" }}>
-                  {service.description}
-                </p>
-                <ul style={{ listStyle: "none", marginBottom: "28px" }}>
-                  {service.features.map((f) => (
-                    <li key={f} style={{
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(22px, 2.5vw, 30px)",
+                      fontWeight: 400,
+                      color: "var(--text)",
+                      marginBottom: "6px",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: "var(--accent)",
+                      letterSpacing: "0.04em",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {service.tagline}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: "var(--text-muted)",
+                      lineHeight: 1.75,
+                      marginBottom: "28px",
+                    }}
+                  >
+                    {service.desc}
+                  </p>
+                  <ul
+                    style={{
+                      listStyle: "none",
                       display: "flex",
-                      alignItems: "center",
+                      flexDirection: "column",
                       gap: "10px",
-                      marginBottom: "10px",
-                      fontSize: "14px",
-                      color: "#444",
-                    }}>
-                      <span style={{ color: "#00A699", fontSize: "16px" }}>✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/contact" className="btn-primary" style={{
-                  width: "100%",
-                  justifyContent: "center",
-                  background: service.popular ? "#FF5A5F" : "#222222",
-                }}>
-                  {service.cta}
-                </Link>
-              </div>
+                      marginBottom: "32px",
+                    }}
+                  >
+                    {service.features.map((f) => (
+                      <li
+                        key={f}
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-start",
+                          gap: "10px",
+                          fontSize: "14px",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: "inline-block",
+                            width: "4px",
+                            height: "4px",
+                            background: "var(--accent)",
+                            borderRadius: "50%",
+                            marginTop: "7px",
+                            flexShrink: 0,
+                          }}
+                        />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/contact"
+                    className="btn-secondary"
+                    style={{ fontSize: "14px", padding: "10px 20px" }}
+                  >
+                    {service.title === "Domain Brokering"
+                      ? "Start a Search"
+                      : "Learn More"}
+                  </Link>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
+
+        <style>{`
+          @media (max-width: 900px) {
+            section:nth-of-type(2) .container > div:last-child {
+              grid-template-columns: 1fr !important;
+              gap: 0 !important;
+            }
+            section:nth-of-type(2) .container > div:last-child > div {
+              border-right: none !important;
+              padding-right: 0 !important;
+              border-top: none !important;
+              border-bottom: 1px solid var(--border) !important;
+              padding: 32px 0 !important;
+            }
+          }
+        `}</style>
       </section>
 
-      {/* Domain Listings */}
-      <section className="section" style={{ background: "#F7F7F7" }}>
+      {/* ─── DOMAIN LISTINGS ─────────────────────────────── */}
+      <section className="section" style={{ background: "var(--bg)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 className="section-title">Current Domain Listings</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto 32px" }}>
-              A snapshot of domains currently available. Contact us for pricing and availability.
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              marginBottom: "40px",
+              flexWrap: "wrap",
+              gap: "16px",
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  color: "var(--text-faint)",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: "10px",
+                }}
+              >
+                Current Inventory
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(28px, 3.5vw, 44px)",
+                  fontWeight: 400,
+                  letterSpacing: "-0.025em",
+                  color: "var(--text)",
+                }}
+              >
+                Available domains.
+              </h2>
+            </div>
+            <p
+              style={{
+                fontSize: "14px",
+                color: "var(--text-muted)",
+                maxWidth: "360px",
+                textAlign: "right",
+              }}
+            >
+              Contact us for full pricing details and availability. Catalog
+              updated weekly.
             </p>
-            <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
+          </div>
+
+          {/* Table */}
+          <div
+            style={{
+              borderTop: "1px solid var(--border-strong)",
+            }}
+          >
+            {/* Header */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 140px 140px",
+                padding: "14px 0",
+                borderBottom: "1px solid var(--border)",
+              }}
+            >
+              {["Domain", "Category", "Price Range"].map((h) => (
+                <span
+                  key={h}
                   style={{
-                    padding: "8px 18px",
-                    borderRadius: "20px",
-                    border: "1px solid #DDD",
-                    background: cat === "All" ? "#222" : "white",
-                    color: cat === "All" ? "white" : "#717171",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "var(--text-faint)",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
                   }}
                 >
-                  {cat}
-                </button>
+                  {h}
+                </span>
               ))}
             </div>
-          </div>
 
-          <div style={{
-            background: "white",
-            borderRadius: "16px",
-            overflow: "hidden",
-            border: "1px solid #E8E8E8",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-          }}>
-            {/* Table Header */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 120px 120px",
-              padding: "16px 24px",
-              background: "#FAFAFA",
-              borderBottom: "1px solid #E8E8E8",
-              fontSize: "12px",
-              fontWeight: "700",
-              color: "#717171",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-            }}>
-              <span>Domain Name</span>
-              <span>Category</span>
-              <span>Price</span>
-            </div>
-            {domainListings.map((d, i) => (
-              <div
-                key={d.name}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 120px 120px",
-                  padding: "18px 24px",
-                  borderBottom: i < domainListings.length - 1 ? "1px solid #F0F0F0" : "none",
-                  alignItems: "center",
-                  transition: "background 0.15s",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "#F9F9F9")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ fontSize: "20px" }}>🌐</span>
-                  <span style={{ fontSize: "15px", fontWeight: "600", color: "#222222" }}>{d.name}</span>
-                </div>
-                <span style={{
-                  fontSize: "13px",
-                  background: "#F0F0F0",
-                  color: "#717171",
-                  padding: "4px 10px",
-                  borderRadius: "12px",
-                  fontWeight: "500",
-                  width: "fit-content",
-                }}>
-                  {d.category}
-                </span>
-                <span style={{ fontSize: "15px", fontWeight: "700", color: "#FF5A5F" }}>{d.price}</span>
-              </div>
+            {domains.map((d, i) => (
+              <Reveal key={d.name} delay={i * 50}>
+                <DomainRow domain={d} />
+              </Reveal>
             ))}
           </div>
 
-          <div style={{ textAlign: "center", marginTop: "40px" }}>
+          <div style={{ marginTop: "40px", textAlign: "left" }}>
             <Link href="/contact" className="btn-primary">
               Request Full Catalog
             </Link>
@@ -251,57 +389,182 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Pricing Tiers */}
-      <section className="section" style={{ background: "white" }}>
+      {/* ─── PRICING TIERS ──────────────────────────────── */}
+      <section className="section" style={{ background: "var(--bg-alt)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 className="section-title">Transparent Pricing</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto" }}>
-              No hidden fees. Clear pricing for every domain and service we offer.
+          <div style={{ marginBottom: "56px" }}>
+            <p
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "var(--text-faint)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "10px",
+              }}
+            >
+              Pricing
             </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(28px, 3.5vw, 44px)",
+                fontWeight: 400,
+                letterSpacing: "-0.025em",
+                color: "var(--text)",
+              }}
+            >
+              Transparent pricing. No surprises.
+            </h2>
           </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "24px",
-            maxWidth: "960px",
-            margin: "0 auto",
-          }}>
-            {[
-              { tier: "Starter", price: "From $500", desc: "Quality domains ideal for personal projects and small businesses.", color: "#717171" },
-              { tier: "Growth", price: "From $1,500", desc: "Premium brandable domains for startups and growing companies.", color: "#FF5A5F", featured: true },
-              { tier: "Enterprise", price: "Custom", desc: "High-value, ultra-premium domains with full brokering support.", color: "#00A699" },
-            ].map((plan) => (
-              <div key={plan.tier} className="card" style={{
-                textAlign: "center",
-                border: plan.featured ? "2px solid #FF5A5F" : "1px solid #E8E8E8",
-              }}>
-                {plan.featured && (
-                  <div style={{
-                    background: "#FF5A5F",
-                    color: "white",
-                    padding: "4px 16px",
-                    borderRadius: "12px",
-                    fontSize: "12px",
-                    fontWeight: "700",
-                    marginBottom: "16px",
-                    display: "inline-block",
-                  }}>
-                    Most Popular
-                  </div>
-                )}
-                <h3 style={{ fontSize: "20px", fontWeight: "700", color: plan.color, marginBottom: "8px" }}>{plan.tier}</h3>
-                <p style={{ fontSize: "32px", fontWeight: "800", color: "#222222", marginBottom: "16px" }}>{plan.price}</p>
-                <p style={{ fontSize: "15px", color: "#717171", lineHeight: "1.7", marginBottom: "28px" }}>{plan.desc}</p>
-                <Link href="/contact" className="btn-primary" style={{
-                  background: plan.featured ? "#FF5A5F" : "#222222",
-                  width: "100%",
-                  justifyContent: "center",
-                }}>
-                  Get Started
-                </Link>
-              </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "24px",
+            }}
+          >
+            {tiers.map((tier, i) => (
+              <Reveal key={tier.name} delay={i * 80}>
+                <div
+                  style={{
+                    background: tier.featured ? "var(--text)" : "var(--surface)",
+                    border: tier.featured ? "none" : "1px solid var(--border)",
+                    padding: "40px 32px",
+                    position: "relative",
+                  }}
+                >
+                  {tier.featured && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-1px",
+                        left: "32px",
+                        background: "var(--accent)",
+                        padding: "4px 12px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        color: "white",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Most Common
+                    </div>
+                  )}
+                  <p
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: tier.featured ? "rgba(248,247,244,0.5)" : "var(--accent)",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    {tier.name}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(28px, 3vw, 40px)",
+                      fontWeight: 400,
+                      color: tier.featured ? "var(--bg)" : "var(--text)",
+                      lineHeight: 1,
+                      marginBottom: "20px",
+                      letterSpacing: "-0.03em",
+                    }}
+                  >
+                    {tier.price}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: tier.featured
+                        ? "rgba(248,247,244,0.55)"
+                        : "var(--text-muted)",
+                      lineHeight: 1.7,
+                      marginBottom: "32px",
+                    }}
+                  >
+                    {tier.desc}
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="btn-primary"
+                    style={{
+                      width: "100%",
+                      justifyContent: "center",
+                      background: tier.featured ? "var(--bg)" : "var(--text)",
+                      color: tier.featured ? "var(--text)" : "var(--bg)",
+                      borderRadius: "3px",
+                    }}
+                  >
+                    {tier.cta}
+                  </Link>
+                </div>
+              </Reveal>
             ))}
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 768px) {
+            section:nth-of-type(4) .container > div:last-child {
+              grid-template-columns: 1fr !important;
+            }
+          }
+        `}</style>
+      </section>
+
+      {/* ─── CTA ────────────────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--bg)",
+          borderTop: "1px solid var(--border)",
+          padding: "96px 0",
+        }}
+      >
+        <div className="container">
+          <div style={{ maxWidth: "560px" }}>
+            <Reveal direction="left">
+              <div>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(32px, 4.5vw, 52px)",
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.025em",
+                    color: "var(--text)",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Don&apos;t see what you need?
+                </h2>
+                <p
+                  style={{
+                    fontSize: "17px",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.7,
+                    marginBottom: "36px",
+                  }}
+                >
+                  Our brokering service can find and acquire virtually any domain.
+                  Tell us what you&apos;re looking for and we&apos;ll make it happen.
+                </p>
+                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  <Link href="/contact" className="btn-primary">
+                    Start a Domain Search
+                  </Link>
+                  <Link href="/contact" className="btn-secondary">
+                    Talk to Us
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

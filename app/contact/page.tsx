@@ -1,25 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "@/components/Reveal";
+import type { Metadata } from "next";
 
 const contactMethods = [
   {
-    icon: "✉️",
-    title: "Email Us",
+    title: "Email",
     value: "hello@whytl.com",
-    desc: "We reply within 24 hours",
+    desc: "We respond within 24 hours on business days.",
   },
   {
-    icon: "🌍",
-    title: "Visit",
-    value: "Orphilia Ecosystem",
-    desc: "whytl.com is part of Orphilia",
-  },
-  {
-    icon: "⏰",
     title: "Hours",
-    value: "24/7 Digital",
-    desc: "Our team is always on",
+    value: "Always open",
+    desc: "Digital-first. Messages are monitored continuously.",
+  },
+  {
+    title: "Part of",
+    value: "Orphilia Ecosystem",
+    desc: "Whytl is the domain vertical of Orphilia.",
   },
 ];
 
@@ -32,6 +31,13 @@ const inquiryTypes = [
   "Other",
 ];
 
+const faqs = [
+  "How long does a domain transfer take?",
+  "Do you offer escrow services?",
+  "Can I negotiate the price?",
+  "What payment methods do you accept?",
+];
+
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
@@ -42,11 +48,11 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submission
     await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
     setSubmitted(true);
@@ -56,150 +62,343 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const inputStyle = (field: string): React.CSSProperties => ({
+    width: "100%",
+    padding: "13px 16px",
+    borderRadius: "3px",
+    border: `1.5px solid ${focusedField === field ? "var(--text)" : "var(--border)"}`,
+    fontSize: "15px",
+    fontFamily: "var(--font-sans)",
+    color: "var(--text)",
+    background: "var(--surface)",
+    outline: "none",
+    transition: "border-color 0.18s ease",
+  });
+
   return (
     <div>
-      {/* Hero */}
-      <section style={{
-        padding: "100px 0 80px",
-        background: "linear-gradient(180deg, #F7F7F7 0%, #FFFFFF 100%)",
-      }}>
-        <div className="container" style={{ maxWidth: "720px", textAlign: "center" }}>
-          <div style={{
-            display: "inline-block",
-            background: "rgba(255,90,95,0.1)",
-            color: "#FF5A5F",
-            padding: "6px 16px",
-            borderRadius: "20px",
-            fontSize: "14px",
-            fontWeight: "600",
-            marginBottom: "24px",
-          }}>
-            📬 Get in Touch
+      {/* ─── HERO ───────────────────────────────────────── */}
+      <section
+        style={{
+          padding: "96px 0 80px",
+          background: "var(--bg)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <div className="container">
+          <div style={{ maxWidth: "600px" }}>
+            <p
+              className="animate-fade-up"
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "var(--text-faint)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "24px",
+                  height: "1.5px",
+                  background: "var(--accent)",
+                }}
+              />
+              Contact
+            </p>
+
+            <h1
+              className="animate-fade-up delay-1"
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(40px, 6vw, 80px)",
+                fontWeight: 400,
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                color: "var(--text)",
+                marginBottom: "28px",
+              }}
+            >
+              Let&apos;s find your
+              <br />
+              <em style={{ fontStyle: "italic" }}>perfect domain.</em>
+            </h1>
+
+            <p
+              className="animate-fade-up delay-2"
+              style={{
+                fontSize: "clamp(16px, 2vw, 18px)",
+                color: "var(--text-muted)",
+                lineHeight: 1.7,
+              }}
+            >
+              Whether you know exactly what you want or you&apos;re just
+              exploring — we&apos;d love to hear from you. No pressure, no
+              obligation.
+            </p>
           </div>
-          <h1 style={{
-            fontSize: "clamp(36px, 5vw, 60px)",
-            fontWeight: "800",
-            color: "#222222",
-            lineHeight: "1.15",
-            marginBottom: "24px",
-            letterSpacing: "-1.5px",
-          }}>
-            Let's find your<br />perfect domain.
-          </h1>
-          <p style={{ fontSize: "20px", color: "#717171", lineHeight: "1.6" }}>
-            Whether you're looking for a specific domain, have questions about our services, or want to explore partnership opportunities — we'd love to hear from you.
-          </p>
         </div>
       </section>
 
-      {/* Contact Content */}
-      <section className="section" style={{ background: "white" }}>
+      {/* ─── CONTENT ─────────────────────────────────────── */}
+      <section className="section" style={{ background: "var(--surface)" }}>
         <div className="container">
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1.5fr",
-            gap: "64px",
-            alignItems: "start",
-          }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1.5fr",
+              gap: "80px",
+              alignItems: "start",
+            }}
+          >
             {/* Left: Info */}
-            <div>
-              <h2 style={{ fontSize: "24px", fontWeight: "800", color: "#222222", marginBottom: "32px" }}>
-                Contact information
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "48px" }}>
-                {contactMethods.map((method) => (
-                  <div key={method.title} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                    <span style={{ fontSize: "28px" }}>{method.icon}</span>
-                    <div>
-                      <p style={{ fontSize: "14px", color: "#717171", fontWeight: "500", marginBottom: "2px" }}>{method.title}</p>
-                      <p style={{ fontSize: "16px", fontWeight: "700", color: "#222222" }}>{method.value}</p>
-                      <p style={{ fontSize: "13px", color: "#B0B0B0" }}>{method.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <Reveal direction="left">
+              <div>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(24px, 2.5vw, 32px)",
+                    fontWeight: 400,
+                    letterSpacing: "-0.02em",
+                    color: "var(--text)",
+                    marginBottom: "36px",
+                  }}
+                >
+                  Reach us directly.
+                </h2>
 
-              {/* FAQ Teaser */}
-              <div style={{
-                background: "#F7F7F7",
-                borderRadius: "16px",
-                padding: "28px",
-                border: "1px solid #EDEDED",
-              }}>
-                <h3 style={{ fontSize: "16px", fontWeight: "700", color: "#222222", marginBottom: "12px" }}>
-                  💡 Common Questions
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0",
+                    borderTop: "1px solid var(--border)",
+                    marginBottom: "48px",
+                  }}
+                >
+                  {contactMethods.map((m) => (
+                    <div
+                      key={m.title}
+                      style={{
+                        padding: "20px 0",
+                        borderBottom: "1px solid var(--border)",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: 600,
+                          color: "var(--text-faint)",
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {m.title}
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          color: "var(--text)",
+                          marginBottom: "4px",
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        {m.value}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        {m.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* FAQ */}
+                <h3
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "13px",
+                    fontWeight: 700,
+                    color: "var(--text-faint)",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    marginBottom: "16px",
+                  }}
+                >
+                  Common Questions
                 </h3>
-                <ul style={{ listStyle: "none" }}>
-                  {[
-                    "How long does a domain transfer take?",
-                    "Do you offer escrow services?",
-                    "Can I negotiate the price?",
-                    "What payment methods do you accept?",
-                  ].map((q) => (
-                    <li key={q} style={{
-                      padding: "10px 0",
-                      borderBottom: "1px solid #E8E8E8",
-                      fontSize: "14px",
-                      color: "#717171",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}>
-                      <span style={{ color: "#00A699" }}>→</span> {q}
+                <ul
+                  style={{
+                    listStyle: "none",
+                    borderTop: "1px solid var(--border)",
+                  }}
+                >
+                  {faqs.map((q) => (
+                    <li
+                      key={q}
+                      style={{
+                        padding: "13px 0",
+                        borderBottom: "1px solid var(--border)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        fontSize: "14px",
+                        color: "var(--text-muted)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "var(--accent)",
+                          fontSize: "12px",
+                          flexShrink: 0,
+                        }}
+                      >
+                        →
+                      </span>
+                      {q}
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </Reveal>
 
             {/* Right: Form */}
-            <div>
+            <Reveal delay={100}>
               {submitted ? (
-                <div style={{
-                  textAlign: "center",
-                  padding: "64px 32px",
-                  background: "#F7F7F7",
-                  borderRadius: "24px",
-                  border: "1px solid #E8E8E8",
-                }}>
-                  <span style={{ fontSize: "64px", display: "block", marginBottom: "24px" }}>🎉</span>
-                  <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#222222", marginBottom: "12px" }}>
-                    Message sent!
+                <div
+                  style={{
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    padding: "64px 48px",
+                    textAlign: "center",
+                  }}
+                >
+                  {/* Check icon */}
+                  <div
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      background: "var(--text)",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 28px",
+                    }}
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      stroke="#F8F7F4"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    >
+                      <polyline points="4 11 9 16 18 7" />
+                    </svg>
+                  </div>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(26px, 3vw, 36px)",
+                      fontWeight: 400,
+                      color: "var(--text)",
+                      marginBottom: "16px",
+                      letterSpacing: "-0.025em",
+                    }}
+                  >
+                    Message received.
                   </h2>
-                  <p style={{ fontSize: "16px", color: "#717171", lineHeight: "1.7", marginBottom: "28px" }}>
-                    Thanks for reaching out, <strong>{form.name || "there"}</strong>. We've received your message and will get back to you at <strong>{form.email}</strong> within 24 hours.
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      color: "var(--text-muted)",
+                      lineHeight: 1.7,
+                      marginBottom: "32px",
+                      maxWidth: "360px",
+                      margin: "0 auto 32px",
+                    }}
+                  >
+                    Thanks,{" "}
+                    <strong style={{ color: "var(--text)" }}>
+                      {form.name || "there"}
+                    </strong>
+                    . We&apos;ll get back to you at{" "}
+                    <strong style={{ color: "var(--text)" }}>{form.email}</strong>{" "}
+                    within 24 hours.
                   </p>
                   <button
-                    onClick={() => { setSubmitted(false); setForm({ name: "", email: "", inquiryType: "", domain: "", message: "" }); }}
-                    style={{
-                      background: "#222222",
-                      color: "white",
-                      padding: "12px 28px",
-                      borderRadius: "12px",
-                      fontWeight: "600",
-                      border: "none",
-                      cursor: "pointer",
+                    onClick={() => {
+                      setSubmitted(false);
+                      setForm({
+                        name: "",
+                        email: "",
+                        inquiryType: "",
+                        domain: "",
+                        message: "",
+                      });
                     }}
+                    className="btn-secondary"
+                    style={{ fontSize: "14px" }}
                   >
                     Send another message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={{
-                  background: "white",
-                  border: "1px solid #E8E8E8",
-                  borderRadius: "24px",
-                  padding: "40px",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                }}>
-                  <h2 style={{ fontSize: "22px", fontWeight: "800", color: "#222222", marginBottom: "28px" }}>
-                    Send us a message
+                <form
+                  onSubmit={handleSubmit}
+                  style={{
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    padding: "48px",
+                  }}
+                >
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(22px, 2.5vw, 30px)",
+                      fontWeight: 400,
+                      color: "var(--text)",
+                      marginBottom: "36px",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    Send us a note.
                   </h2>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
-                    {/* Name */}
+                  {/* Name + Email */}
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "16px",
+                      marginBottom: "16px",
+                    }}
+                  >
                     <div>
-                      <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          color: "var(--text-muted)",
+                          marginBottom: "6px",
+                          letterSpacing: "0.01em",
+                        }}
+                      >
                         Full Name *
                       </label>
                       <input
@@ -207,24 +406,23 @@ export default function ContactPage() {
                         required
                         value={form.name}
                         onChange={(e) => handleChange("name", e.target.value)}
+                        onFocus={() => setFocusedField("name")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder="Jane Smith"
-                        style={{
-                          width: "100%",
-                          padding: "12px 16px",
-                          borderRadius: "10px",
-                          border: "1px solid #DDD",
-                          fontSize: "15px",
-                          outline: "none",
-                          transition: "border-color 0.2s",
-                          fontFamily: "inherit",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = "#FF5A5F")}
-                        onBlur={(e) => (e.target.style.borderColor = "#DDD")}
+                        style={inputStyle("name")}
                       />
                     </div>
-                    {/* Email */}
                     <div>
-                      <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          color: "var(--text-muted)",
+                          marginBottom: "6px",
+                          letterSpacing: "0.01em",
+                        }}
+                      >
                         Email Address *
                       </label>
                       <input
@@ -232,78 +430,98 @@ export default function ContactPage() {
                         required
                         value={form.email}
                         onChange={(e) => handleChange("email", e.target.value)}
+                        onFocus={() => setFocusedField("email")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder="jane@company.com"
-                        style={{
-                          width: "100%",
-                          padding: "12px 16px",
-                          borderRadius: "10px",
-                          border: "1px solid #DDD",
-                          fontSize: "15px",
-                          outline: "none",
-                          transition: "border-color 0.2s",
-                          fontFamily: "inherit",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = "#FF5A5F")}
-                        onBlur={(e) => (e.target.style.borderColor = "#DDD")}
+                        style={inputStyle("email")}
                       />
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: "20px" }}>
-                    <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
+                  {/* Inquiry type */}
+                  <div style={{ marginBottom: "16px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        color: "var(--text-muted)",
+                        marginBottom: "6px",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
                       Inquiry Type *
                     </label>
                     <select
                       required
                       value={form.inquiryType}
                       onChange={(e) => handleChange("inquiryType", e.target.value)}
+                      onFocus={() => setFocusedField("inquiryType")}
+                      onBlur={() => setFocusedField(null)}
                       style={{
-                        width: "100%",
-                        padding: "12px 16px",
-                        borderRadius: "10px",
-                        border: "1px solid #DDD",
-                        fontSize: "15px",
-                        outline: "none",
-                        background: "white",
-                        fontFamily: "inherit",
-                        color: form.inquiryType ? "#222" : "#B0B0B0",
+                        ...inputStyle("inquiryType"),
+                        color: form.inquiryType
+                          ? "var(--text)"
+                          : "var(--text-faint)",
+                        cursor: "pointer",
                       }}
-                      onFocus={(e) => (e.target.style.borderColor = "#FF5A5F")}
-                      onBlur={(e) => (e.target.style.borderColor = "#DDD")}
                     >
-                      <option value="" disabled>Select inquiry type...</option>
+                      <option value="" disabled>
+                        Select inquiry type...
+                      </option>
                       {inquiryTypes.map((t) => (
-                        <option key={t} value={t}>{t}</option>
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
                       ))}
                     </select>
                   </div>
 
-                  <div style={{ marginBottom: "20px" }}>
-                    <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
-                      Domain of Interest <span style={{ color: "#B0B0B0", fontWeight: "400" }}>(optional)</span>
+                  {/* Domain of interest */}
+                  <div style={{ marginBottom: "16px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        color: "var(--text-muted)",
+                        marginBottom: "6px",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
+                      Domain of Interest{" "}
+                      <span
+                        style={{
+                          fontWeight: 400,
+                          color: "var(--text-faint)",
+                        }}
+                      >
+                        (optional)
+                      </span>
                     </label>
                     <input
                       type="text"
                       value={form.domain}
                       onChange={(e) => handleChange("domain", e.target.value)}
+                      onFocus={() => setFocusedField("domain")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder="e.g., keystone.ai"
-                      style={{
-                        width: "100%",
-                        padding: "12px 16px",
-                        borderRadius: "10px",
-                        border: "1px solid #DDD",
-                        fontSize: "15px",
-                        outline: "none",
-                        transition: "border-color 0.2s",
-                        fontFamily: "inherit",
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = "#FF5A5F")}
-                      onBlur={(e) => (e.target.style.borderColor = "#DDD")}
+                      style={inputStyle("domain")}
                     />
                   </div>
 
+                  {/* Message */}
                   <div style={{ marginBottom: "32px" }}>
-                    <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        color: "var(--text-muted)",
+                        marginBottom: "6px",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
                       Message *
                     </label>
                     <textarea
@@ -311,23 +529,18 @@ export default function ContactPage() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => handleChange("message", e.target.value)}
+                      onFocus={() => setFocusedField("message")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder="Tell us what you're looking for..."
                       style={{
-                        width: "100%",
-                        padding: "12px 16px",
-                        borderRadius: "10px",
-                        border: "1px solid #DDD",
-                        fontSize: "15px",
-                        outline: "none",
+                        ...inputStyle("message"),
                         resize: "vertical",
-                        fontFamily: "inherit",
-                        lineHeight: "1.6",
+                        lineHeight: 1.6,
                       }}
-                      onFocus={(e) => (e.target.style.borderColor = "#FF5A5F")}
-                      onBlur={(e) => (e.target.style.borderColor = "#DDD")}
                     />
                   </div>
 
+                  {/* Submit */}
                   <button
                     type="submit"
                     disabled={loading}
@@ -336,35 +549,83 @@ export default function ContactPage() {
                       width: "100%",
                       justifyContent: "center",
                       padding: "16px",
-                      fontSize: "16px",
-                      opacity: loading ? "0.7" : "1",
+                      fontSize: "15px",
+                      opacity: loading ? 0.7 : 1,
                       cursor: loading ? "not-allowed" : "pointer",
+                      borderRadius: "3px",
                     }}
                   >
                     {loading ? (
                       <>
-                        <span>⏳</span> Sending...
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          style={{
+                            animation:
+                              "spin 0.8s linear infinite",
+                          }}
+                        >
+                          <circle
+                            cx="8"
+                            cy="8"
+                            r="6"
+                            stroke="rgba(255,255,255,0.3)"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M14 8a6 6 0 0 1-6 6"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        Sending...
                       </>
                     ) : (
                       <>
-                        Send Message →
+                        Send Message
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M2 7h10M8 3l4 4-4 4" />
+                        </svg>
                       </>
                     )}
                   </button>
 
-                  <p style={{ fontSize: "12px", color: "#B0B0B0", textAlign: "center", marginTop: "16px" }}>
-                    We respect your privacy. Your information will never be shared with third parties.
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--text-faint)",
+                      textAlign: "center",
+                      marginTop: "16px",
+                    }}
+                  >
+                    We never share your information with third parties.
                   </p>
                 </form>
               )}
-            </div>
+            </Reveal>
           </div>
         </div>
+
         <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
           @media (max-width: 768px) {
-            section:last-of-type .container > div {
+            section:nth-of-type(2) .container > div {
               grid-template-columns: 1fr !important;
+              gap: 48px !important;
             }
+            form { padding: 32px 24px !important; }
           }
         `}</style>
       </section>
