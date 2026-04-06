@@ -128,7 +128,7 @@ export default function HomePage() {
                 marginBottom: "32px",
               }}
             >
-              My perfect
+              Your perfect
               <br />
               <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
                 domain
